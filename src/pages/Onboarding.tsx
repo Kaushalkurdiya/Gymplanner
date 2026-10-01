@@ -63,7 +63,7 @@ export default function Onboarding() {
     preferredSplit: "upper_lower",
   });
   const [isGenerating, setIsGenerating] = useState(false);
-  const [setError] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   function updateForm(field: string, value: string) {
@@ -170,7 +170,7 @@ export default function Onboarding() {
                   value={formData.injuries}
                   onChange={(e) => updateForm("injuries", e.target.value)}
                 />
-
+                 {error && <p className="text-red-500 text-sm">{error}</p>}
                 <div className="flex gap-3 pt-2">
                   <Button type="submit" className="flex-1 gap-2">
                     Generate My Plan <ArrowRight className="w-4 h-4" />
