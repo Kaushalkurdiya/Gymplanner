@@ -8,7 +8,7 @@ import {
   type ReactNode,
 } from "react";
 import type { TrainingPlan, User, UserProfile } from "../types";
-import { authClient } from "../lib/auth";
+import { authClient } from "../lib/neon";
 import { api } from "../lib/api";
 
 interface AuthContextType {
