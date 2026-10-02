@@ -24,9 +24,11 @@ function Providers({ children }: { children: ReactNode }) {
       defaultTheme="dark"
       navigate={navigate}
       replace={(href: string) => navigate(href, { replace: true })}
-      <Link to={href} className={className}>
-      {children}
-    </Link>
+      Link={({ href, className, children }) => (
+        <Link to={href} className={className}>
+          {children}
+        </Link>
+      )}
     >
       {children}
     </NeonAuthUIProvider>
