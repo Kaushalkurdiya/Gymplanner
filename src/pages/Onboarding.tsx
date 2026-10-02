@@ -1,4 +1,3 @@
-import { RedirectToSignIn, SignedIn } from "@neondatabase/neon-js/auth/react";
 import { useAuth } from "../context/AuthContext";
 import { Card } from "../components/ui/Card";
 import { Select } from "../components/ui/Select";
@@ -7,7 +6,7 @@ import { Textarea } from "../components/ui/Textarea";
 import { Button } from "../components/ui/Button";
 import { ArrowRight, Loader2 } from "lucide-react";
 import type { UserProfile } from "../types";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const goalOptions = [
   { value: "bulk", label: "Build Muscle (Bulk)" },
@@ -52,7 +51,7 @@ const splitOptions = [
 ];
 
 export default function Onboarding() {
-  const { user, saveProfile, generatePlan } = useAuth();
+  const { user, isLoading, saveProfile, generatePlan } = useAuth();
   const [formData, setFormData] = useState({
     goal: "bulk",
     experience: "intermediate",
@@ -94,12 +93,19 @@ export default function Onboarding() {
     }
   }
 
-  if (!user) {
-    return <RedirectToSignIn />;
-  }
+  if (isLoading) {
+  return (
+    <div className="min-h-screen flex items-center justify-center">
+      <Loader2 className="w-8 h-8 animate-spin text-[var(--color-accent)]" />
+    </div>
+  );
+}
+
+if (!user) {
+  return <Navigate to="/auth/sign-in?redirectTo=/onboarding" replace />;
+}
 
   return (
-    <SignedIn>
       <div className="min-h-screen pt-24 pb-12 px-6">
         <div className="max-w-xl mx-auto">
           {/* Progress Indicator */}
@@ -190,6 +196,5 @@ export default function Onboarding() {
           )}
         </div>
       </div>
-    </SignedIn>
   );
 }
