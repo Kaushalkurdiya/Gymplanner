@@ -80,7 +80,8 @@ export default function Home() {
                 <ArrowRight className="w-5 h-5" />
               </Button>
             </Link>
-            <Link to="/onboarding">
+            
+            <Link to="/auth/sign-in">
               <Button variant="secondary" size="lg">
                 Sign In
               </Button>
