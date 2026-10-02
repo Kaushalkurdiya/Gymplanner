@@ -26,7 +26,7 @@ const AuthContext = createContext<AuthContextType | null>(null);
 
 export default function AuthProvider({ children }: { children: ReactNode }) {
   const { data: session, isPending } = authClient.useSession();
-  const neonUser = session?.user ?? null;
+ const neonUser: any = session?.user ?? null;
   const isLoading = isPending;
 
   const [plan, setPlan] = useState<TrainingPlan | null>(null);
