@@ -1,4 +1,11 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter,
+  Link,
+  Route,
+  Routes,
+  useNavigate,
+} from "react-router-dom";
+import type { ReactNode } from "react";
 import Home from "./pages/Home";
 import Onboarding from "./pages/Onboarding";
 import Profile from "./pages/Profile";
@@ -9,11 +16,26 @@ import { NeonAuthUIProvider } from "@neondatabase/neon-js/auth/react";
 import { authClient } from "./lib/neon";
 import AuthProvider from "./context/AuthContext";
 
+function Providers({ children }: { children: ReactNode }) {
+  const navigate = useNavigate();
+  return (
+    <NeonAuthUIProvider
+      authClient={authClient}
+      defaultTheme="dark"
+      navigate={navigate}
+      replace={(href: string) => navigate(href, { replace: true })}
+      Link={Link}
+    >
+      {children}
+    </NeonAuthUIProvider>
+  );
+}
+
 function App() {
   return (
-    <NeonAuthUIProvider authClient={authClient} defaultTheme="dark">
-      <AuthProvider>
-        <BrowserRouter>
+    <BrowserRouter>
+      <Providers>
+        <AuthProvider>
           <div className="min-h-screen flex flex-col">
             <Navbar />
             <main className="flex-1">
@@ -26,9 +48,9 @@ function App() {
               </Routes>
             </main>
           </div>
-        </BrowserRouter>
-      </AuthProvider>
-    </NeonAuthUIProvider>
+        </AuthProvider>
+      </Providers>
+    </BrowserRouter>
   );
 }
 
