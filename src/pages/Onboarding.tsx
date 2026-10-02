@@ -102,7 +102,7 @@ export default function Onboarding() {
 }
 
 if (!user) {
-  return <Navigate to="/auth/sign-in?redirectTo=/onboarding" replace />;
+  return <Navigate to="/auth/sign-up?redirectTo=/onboarding" replace />;
 }
 
   return (
