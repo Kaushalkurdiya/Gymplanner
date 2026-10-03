@@ -111,13 +111,3 @@ npm run dev
 4. The server prompts OpenAI to generate a structured workout plan.
 5. The plan is saved to PostgreSQL through Prisma and shown in the UI.
 
-## 🗺️ Future Improvements
-
-- Progress and workout logging
-- Exercise demo videos or images
-- Plan editing and regeneration
-- Dockerized setup
-
-## 👤 Author
-
-**Kaushal Kurdiya** — [GitHub](https://github.com/Kaushalkurdiya)
