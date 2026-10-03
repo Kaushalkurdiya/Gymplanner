@@ -1,73 +1,123 @@
-# React + TypeScript + Vite
+# 🏋️ AI Gym Planner
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An AI-powered gym planner that generates personalized workout plans based on your goals, experience level and schedule. Built with React, TypeScript and an Express + PostgreSQL backend.
 
-Currently, two official plugins are available:
+**🔗 Live demo:** https://gymplanner-1.onrender.com
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<!-- Add 2-3 screenshots here, e.g. ![Dashboard](./public/screenshots/dashboard.png) -->
 
-## React Compiler
+## ✨ Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **AI-generated workout plans** using the OpenAI API, tailored to the user's goal, level and available days
+- **Secure authentication** with Neon Auth (sign up, sign in, protected routes)
+- **Saved plans** stored in PostgreSQL via Prisma
+- **Responsive UI** built with Tailwind CSS
+- **Client-side routing** with React Router
 
-## Expanding the ESLint configuration
+<!-- Edit this list to match exactly what your app does (e.g. progress tracking, exercise library, plan history) -->
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🛠️ Tech Stack
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+| Layer | Technology |
+| --- | --- |
+| Frontend | React 19, TypeScript, Vite, Tailwind CSS v4, React Router, Lucide Icons |
+| Backend | Node.js, Express.js |
+| Database | PostgreSQL (Neon), Prisma ORM |
+| Auth | Neon Auth |
+| AI | OpenAI API |
+| Deployment | Render |
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 📁 Project Structure
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+Gymplanner/
+├── public/          # Static assets
+├── src/             # React + TypeScript frontend
+├── server/          # Express backend (API, Prisma, OpenAI integration)
+├── index.html
+├── vite.config.ts
+└── package.json
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## ⚙️ Getting Started
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Prerequisites
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- Node.js 18+
+- A PostgreSQL database (e.g. [Neon](https://neon.tech))
+- A Neon Auth project
+- An OpenAI API key
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/Kaushalkurdiya/Gymplanner.git
+cd Gymplanner
 ```
+
+### 2. Set up the frontend
+
+```bash
+npm install
+```
+
+Create a `.env` file in the project root:
+
+```env
+VITE_NEON_AUTH_URL=your_neon_auth_url
+VITE_API_URL=http://localhost:5000
+```
+
+Start the dev server:
+
+```bash
+npm run dev
+```
+
+### 3. Set up the backend
+
+```bash
+cd server
+npm install
+```
+
+Create a `.env` file inside `server/`:
+
+```env
+DATABASE_URL=your_postgresql_connection_string
+OPENAI_API_KEY=your_openai_api_key
+PORT=5000
+```
+
+Run Prisma migrations and start the server:
+
+```bash
+npx prisma migrate dev
+npm run dev
+```
+
+<!-- Check the variable names and scripts above against your server/package.json and server/.env -->
+
+## 🚀 Deployment
+
+- **Frontend:** deployed as a Render static site. Add a rewrite rule `/*` → `/index.html` so client-side routes (like `/auth/sign-in`) don't return "Not Found".
+- **Backend:** deploy `server/` as a Render web service and set the environment variables above.
+
+## 🔄 How It Works
+
+1. The user signs up or signs in through Neon Auth.
+2. They enter their fitness goal, experience level and weekly availability.
+3. The frontend sends this to the Express API.
+4. The server prompts OpenAI to generate a structured workout plan.
+5. The plan is saved to PostgreSQL through Prisma and shown in the UI.
+
+## 🗺️ Future Improvements
+
+- Progress and workout logging
+- Exercise demo videos or images
+- Plan editing and regeneration
+- Dockerized setup
+
+## 👤 Author
+
+**Kaushal Kurdiya** — [GitHub](https://github.com/Kaushalkurdiya)
